@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Simulator Intervensi Sanitasi</title>
+  
+  <!-- Fonts: Inter for that clean Apple look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Styles for Animations and Glass Effects -->
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      /* Prevent horizontal scroll from background blobs */
+      overflow-x: hidden;
+    }
+
+    /* Liquid Background Blobs Animation */
+    @keyframes float {
+      0% { transform: translate(0px, 0px) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+      100% { transform: translate(0px, 0px) scale(1); }
+    }
+
+    .blob {
+      position: absolute;
+      filter: blur(80px);
+      z-index: -1;
+      opacity: 0.6;
+      animation: float 10s infinite ease-in-out;
+    }
+
+    .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #a78bfa; animation-delay: 0s; }
+    .blob-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: #60a5fa; animation-delay: 2s; }
+    .blob-3 { top: 40%; left: 30%; width: 40vw; height: 40vw; background: #34d399; animation-delay: 4s; }
+
+    /* Glassmorphism Utilities */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.7);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+
+    /* Apple-style Button */
+    .btn-apple {
+      background: #007AFF; /* Apple Blue */
+      color: white;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 6px -1px rgba(0, 122, 255, 0.3);
+    }
+    .btn-apple:hover {
+      background: #0062cc;
+      transform: scale(1.02);
+      box-shadow: 0 6px 10px -1px rgba(0, 122, 255, 0.4);
+    }
+    .btn-apple:active {
+      transform: scale(0.98);
+    }
+
+    /* Fade In Animation for Content */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+    
+    /* Smooth Scroll Behavior handled by 'scroll-smooth' class on html */
+  </style>
+</head>
+<body class="text-slate-800 bg-slate-50 relative selection:bg-blue-200">
+
+  <!-- Background Ambience -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none">
+    <div class="blob blob-1 rounded-full mix-blend-multiply"></div>
+    <div class="blob blob-2 rounded-full mix-blend-multiply"></div>
+    <div class="blob blob-3 rounded-full mix-blend-multiply"></div>
+  </div>
+
+  <!-- LANDING PAGE SECTION -->
+  <section id="landing" class="relative h-screen flex flex-col items-center justify-center p-6 text-center z-10">
+    <div class="glass-panel p-10 md:p-16 rounded-[3rem] max-w-4xl w-full mx-auto animate-fade-in flex flex-col items-center gap-6">
+      <div class="w-16 h-1 bg-gradient-to-r from-blue-500 to-teal-400 rounded-full mb-4"></div>
+      
+      <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-slate-900 leading-tight">
+        Sanitasi <br/>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500">Masa Depan.</span>
+      </h1>
+      
+      <blockquote class="text-xl md:text-2xl text-slate-600 font-light italic mt-6 max-w-2xl leading-relaxed">
+        "Sanitasi adalah fondasi kesehatan, martabat, dan pembangunan manusia. Ia adalah jembatan antara kemiskinan dan kesejahteraan."
+      </blockquote>
+      
+      <div class="mt-8 text-sm font-medium text-slate-400 uppercase tracking-widest">
+        Simulator Intervensi 2.0
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <a href="#app" class="absolute bottom-10 flex flex-col items-center gap-2 text-slate-500 hover:text-blue-600 transition-colors cursor-pointer group">
+      <span class="text-sm font-medium tracking-wide">Gulir untuk Memulai</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 animate-bounce group-hover:translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </a>
+  </section>
+
+
+  <!-- MAIN APP SECTION -->
+  <section id="app" class="relative min-h-screen flex items-center justify-center p-4 md:p-8 z-10 pt-20">
+    
+    <div class="w-full max-w-3xl">
+      
+      <!-- App Header -->
+      <div class="glass-panel rounded-3xl p-8 mb-8 text-center animate-fade-in">
+        <h2 class="text-2xl font-semibold text-slate-800">Pohon Keputusan Intervensi</h2>
+        <p class="text-slate-500 mt-2 text-sm md:text-base">Tentukan variabel untuk memilih intervensi SPALD yang optimal.</p>
+        
+        <!-- Progress Bar -->
+        <div class="mt-6 w-full bg-slate-200/50 rounded-full h-2 overflow-hidden">
+          <div id="progress" class="bg-gradient-to-r from-blue-500 to-teal-400 h-2 rounded-full transition-all duration-700 ease-out shadow-[0_0_10px_rgba(59,130,246,0.5)]" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Game Container -->
+      <div id="game-container" class="min-h-[400px] flex flex-col justify-center">
+        <!-- Content injected by JS -->
+      </div>
+
+      <footer class="mt-12 text-center text-xs font-medium text-slate-400/80 uppercase tracking-widest pb-10">
+        Berdasarkan Logika SPALD Bappenas
+      </footer>
+
+    </div>
+  </section>
+
+<script>
+/**
+ * SANITATION GAME LOGIC
+ * Refined for smoother DOM transitions and better data structure.
+ */
+
+const gameContainer = document.getElementById('game-container');
+const progressEl = document.getElementById('progress');
+let step = 0;
+const totalSteps = 6; // Normalized depth for progress visualization
+
+// Helper to create HTML elements with classes
+function createElement(tag, classes, innerHTML) {
+  const el = document.createElement(tag);
+  if (classes) el.className = classes;
+  if (innerHTML) el.innerHTML = innerHTML;
+  return el;
+}
+
+function updateProgress(currentStep) {
+  const width = Math.min((currentStep / totalSteps) * 100, 100);
+  progressEl.style.width = `${width}%`;
+}
+
+// Fade transition wrapper
+function transitionTo(renderCallback) {
+  // Fade out
+  gameContainer.style.opacity = '0';
+  gameContainer.style.transform = 'translateY(10px)';
+  gameContainer.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+
+  setTimeout(() => {
+    // Clear and render new content
+    gameContainer.innerHTML = '';
+    renderCallback();
+    
+    // Trigger reflow
+    void gameContainer.offsetWidth; 
+
+    // Fade in
+    gameContainer.style.opacity = '1';
+    gameContainer.style.transform = 'translateY(0)';
+  }, 300);
+}
+
+// ---- UI COMPONENTS ----
+
+function renderQuestion(questionText, options) {
+  const wrapper = createElement('div', 'glass-panel p-8 md:p-10 rounded-[2.5rem] animate-fade-in');
+  
+  const title = createElement('h3', 'text-2xl font-bold text-slate-800 mb-8 text-center leading-tight', questionText);
+  wrapper.appendChild(title);
+
+  const grid = createElement('div', 'grid grid-cols-1 md:grid-cols-2 gap-6');
+
+  options.forEach(opt => {
+    const btn = createElement('button', 'glass-card group text-left p-6 rounded-2xl w-full h-full flex flex-col justify-center relative overflow-hidden');
+    
+    // Inner content
+    btn.innerHTML = `
+      <div class="relative z-10">
+        <div class="text-lg font-semibold text-slate-800 group-hover:text-blue-600 transition-colors mb-2">${opt.label}</div>
+        <div class="text-sm text-slate-500 font-normal leading-relaxed">${opt.desc}</div>
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    `;
+    
+    btn.onclick = opt.action;
+    grid.appendChild(btn);
+  });
+
+  wrapper.appendChild(grid);
+  gameContainer.appendChild(wrapper);
+}
+
+function renderConclusion(title, authority, requirements) {
+  const wrapper = createElement('div', 'glass-panel p-8 md:p-12 rounded-[2.5rem] animate-fade-in text-center border-t-4 border-green-400');
+
+  // Success Icon
+  const icon = `
+    <div class="mx-auto w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6 shadow-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+  `;
+  wrapper.innerHTML += icon;
+
+  const h2 = createElement('h2', 'text-3xl font-bold text-slate-800 mb-2', 'Rekomendasi');
+  wrapper.appendChild(h2);
+
+  const recTitle = createElement('div', 'text-xl md:text-2xl font-semibold text-blue-600 mt-2 mb-6', title);
+  wrapper.appendChild(recTitle);
+
+  // Authority Badge
+  const authBadge = createElement('span', 'inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium bg-slate-100 text-slate-600 mb-8', `Kewenangan: ${authority}`);
+  wrapper.appendChild(authBadge);
+
+  // Requirements List
+  const reqContainer = createElement('div', 'text-left bg-white/40 rounded-2xl p-6 md:p-8 backdrop-blur-sm');
+  const reqTitle = createElement('h4', 'text-sm font-bold text-slate-400 uppercase tracking-wider mb-4', 'Persyaratan Utama');
+  reqContainer.appendChild(reqTitle);
+  
+  const ul = createElement('ul', 'space-y-3');
+  requirements.forEach(req => {
+    const li = createElement('li', 'flex items-start text-slate-700');
+    li.innerHTML = `
+      <svg class="h-5 w-5 text-blue-500 mr-3 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span class="leading-snug">${req}</span>
+    `;
+    ul.appendChild(li);
+  });
+  reqContainer.appendChild(ul);
+  wrapper.appendChild(reqContainer);
+
+  // Restart Button
+  const btn = createElement('button', 'btn-apple mt-10 px-8 py-3 rounded-full font-medium text-lg', 'Mulai Simulasi Baru');
+  btn.onclick = () => {
+    window.location.hash = '#app'; // Ensure we stay on app
+    initGame();
+  };
+  wrapper.appendChild(btn);
+
+  gameContainer.appendChild(wrapper);
+}
+
+
+// ---- FULL ALGORITHM LOGIC FLOW (INDONESIAN) ----
+
+function initGame() {
+  step = 1;
+  updateProgress(step);
+  transitionTo(() => {
+    renderQuestion('Pilih Konteks Zona Sanitasi', [
+      { 
+        label: 'Sistem Setempat (On-Site)', 
+        desc: 'Kepadatan rendah (<150 jiwa/ha) atau sistem individual sesuai.', 
+        action: () => logicSetempat() 
+      },
+      { 
+        label: 'Sistem Terpusat (Centralized)', 
+        desc: 'Kepadatan tinggi (>150 jiwa/ha) atau skala perkotaan.', 
+        action: () => logicTerpusat() 
+      }
+    ]);
+  });
+}
+
+// --- SETEMPAT (On-Site) BRANCH ---
+
+function logicSetempat() {
+  step = 2; updateProgress(step);
+  transitionTo(() => {
+    renderQuestion('Apakah Kabupaten/Kota memiliki IPLT yang berfungsi?', [
+      { 
+        label: 'Ya, Ada IPLT', 
+        desc: 'Instalasi Pengolahan Lumpur Tinja tersedia.', 
+        action: () => logicSetempatHasIPLT() 
+      },
+      { 
+        label: 'Tidak Ada IPLT', 
+        desc: 'Belum ada infrastruktur pengolahan lumpur.', 
+        action: () => logicSetempatNoIPLT() 
+      }
+    ]);
+  });
+}
+
+function logicSetempatHasIPLT() {
+  step = 3; updateProgress(step);
+  transitionTo(() => {
+    renderQuestion('Apakah terdapat kapasitas menganggur (idle) di IPLT?', [
+      { 
+        label: 'Ya, Ada Kapasitas', 
+        desc: 'IPLT masih dapat menampung volume lebih.', 
+        action: () => logicSetempatIdle() 
+      },
+      { 
+        label: 'Tidak, Penuh/Overload', 
+        desc: 'IPLT beroperasi pada kapasitas maksimum.', 
+        action: () => finish('Peningkatan Kapasitas IPLT', 'Fokus Pusat', ['Studi teknis kapasitas', 'Kesiapan O&M']) 
+      }
+    ]);
+  });
+}
+
+function logicSetempatIdle() {
+  step = 4; updateProgress(step);
+  transitionTo(() => {
+    renderQuestion('Apakah sistem Layanan Lumpur Tinja Terjadwal (LLTT) sudah aktif?', [
+      { 
+        label: 'Ya, LLTT Aktif', 
+        desc: 'Regulasi & armada truk sudah beroperasi.', 
+        action: () => finish('Optimalisasi IPLT via Pemasaran', 'Operator/Pemda', ['Kampanye LLTT', 'Penegakan Perda']) 
+      },
+      { 
+        label: 'Tidak, LLTT Belum Aktif', 
+        desc: 'Belum ada mekanisme layanan terjadwal.', 
+        action: () => finish('Pembentukan Sistem LLTT', 'Pemda', ['Perkada Tarif', 'Pengadaan Armada', 'Pelatihan Operator']) 
+      }
+    ]);
+  });
+}
+
+function logicSetempatNoIPLT() {
+  step = 3; updateProgress(step);
+  transitionTo(() => {
+    renderQuestion('Apakah tersedia lahan yang sesuai untuk IPLT baru?', [
+      { 
+        label: 'Ya, Lahan Aman', 
+        desc: 'Lahan milik Pemda & status "clean and clear".', 
+        action: () => finish('Pembangunan IPLT Baru', 'Fokus Pusat', ['Dokumen SSK/RSP', 'Kelembagaan operator', 'Dukungan APBD O&M']) 
+      },
+      { 
+        label: 'Tidak Ada Lahan', 
+        desc: 'Sumber daya lahan terbatas.', 
+        action: () => finish('Kerjasama Regional (Regional IPLT)', 'Provinsi/Pusat', ['MoU Antar Daerah', 'Studi Kelayakan Regional']) 
+      }
+    ]);
+  });
+}
+
+// --- TERPUSAT (Centralized) BRANCH ---
+
+function logicTerpusat() {
+  step = 2; updateProgress(step);
+  transitionTo(() => {
+    renderQuestion('Apakah wilayah tersebut memiliki IPAL (WWTP) eksisting?', [
+      { 
+        label: 'Ya, Ada IPAL', 
+        desc: 'Instalasi Pengolahan Air Limbah tersedia.', 
+        action: () => logicTerpusatHasIPAL() 
+      },
+      { 
+        label: 'Tidak Ada IPAL', 
+        desc: 'Belum ada pengolahan terpusat.', 
+        action: () => logicTerpusatNoIPAL() 
+      }
+    ]);
+  });
+}
+
+function logicTerpusatHasIPAL() {
+  step = 3; updateProgress(step);
+  transitionTo(() => {
+    renderQuestion('Apakah terdapat kapasitas menganggur di IPAL?', [
+      { 
+        label: 'Ya, Ada Kapasitas', 
+        desc: 'Instalasi bisa mengolah lebih banyak limbah.', 
+        action: () => logicTerpusatIdle() 
+      },
+      { 
+        label: 'Tidak, Kapasitas Penuh', 
+        desc: 'Sistem terpakai sepenuhnya.', 
+        action: () => finish('Peningkatan Kapasitas IPAL (Uprating)', 'Fokus Pusat', ['Perencanaan teknis', 'Pendanaan konstruksi', 'Penguatan operator']) 
+      }
+    ]);
+  });
+}
+
+function logicTerpusatIdle() {
+  step = 4; updateProgress(step);
+  transitionTo(() => {
+    renderQuestion('Apakah jaringan pipa menjangkau calon sambungan rumah?', [
+      { 
+        label: 'Ya, Terjangkau', 
+        desc: 'Pipa sudah ada di depan rumah.', 
+        action: () => finish('Program Sambungan Rumah (SR)', 'Pemda/DAK', ['Subsidi biaya sambungan', 'Sosialisasi pelanggan']) 
+      },
+      { 
+        label: 'Tidak, Butuh Perluasan', 
+        desc: 'Area belum terlayani jaringan pipa.', 
+        action: () => finish('Perluasan Jaringan Pipa', 'Fokus Pusat/Daerah', ['Survey jalur pipa', 'Perizinan jalan', 'DED Jaringan']) 
+      }
+    ]);
+  });
+}
+
+function logicTerpusatNoIPAL() {
+  step = 3; updateProgress(step);
+  transitionTo(() => {
+    renderQuestion('Apakah Kriteria Kesiapan (Lahan, DED, Masterplan) terpenuhi?', [
+      { 
+        label: 'Ya, Siap (Ready)', 
+        desc: 'Lahan aman & dokumen perencanaan lengkap.', 
+        action: () => finish('Pembangunan IPAL Baru (Skala Kota)', 'Fokus Pusat', ['RTRW & zonasi', 'Kesiapan Calon Pelanggan', 'Operator UPTD/BLUD']) 
+      },
+      { 
+        label: 'Tidak/Belum Siap', 
+        desc: 'Masalah lahan atau perencanaan belum tuntas.', 
+        action: () => finish('Penyiapan Readiness Criteria', 'Pemda', ['Penyusunan DED', 'Pembebasan Lahan IPAL', 'Revisi SSK']) 
+      }
+    ]);
+  });
+}
+
+function finish(title, authority, requirements) {
+  step = 6; updateProgress(step); // Jump to full completion
+  transitionTo(() => {
+    renderConclusion(title, authority, requirements);
+  });
+}
+
+// Start the game on load
+initGame();
+
+</script>
+</body>
+</html>
